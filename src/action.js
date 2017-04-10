@@ -7,6 +7,7 @@ export const ACTIVE_ADD_TODO = 'ACTIVE_ADD_TODO';
 export const COMPLETED_ADD_TODO = 'COMPLETED_ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const DELETE_TODO = 'DELETE_TODO'
 /*
  * 其它的常量
  */
@@ -43,7 +44,11 @@ export function getCnodeApi() {
     fetch("https://cnodejs.org/api/v1/topics")
       .then(res => res.json())
       .then(function (res) {
-        dispatch(activeaddTodo(res.data[0].author.loginname)); //本应该 state.todos=123
+        dispatch(activeaddTodo(res.data[0].author.loginname));
       })
   }
+}
+
+export function deleteTodo(Id) {
+  return {type: DELETE_TODO, Id}
 }

@@ -12,7 +12,7 @@ const loggerMiddleware = createLogger();
 const store = createStore(todoApp, applyMiddleware(thunkMiddleware));
 
 store.subscribe(() => {
-  console.log(1);
+  // console.log(store.getState());
 });
 
 render(

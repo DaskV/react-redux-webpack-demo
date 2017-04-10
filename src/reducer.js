@@ -1,5 +1,12 @@
 import {combineReducers} from 'redux'
-import {ACTIVE_ADD_TODO, COMPLETED_ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters} from './action'
+import {
+  ACTIVE_ADD_TODO,
+  COMPLETED_ADD_TODO,
+  TOGGLE_TODO,
+  SET_VISIBILITY_FILTER,
+  VisibilityFilters,
+  DELETE_TODO
+} from './action'
 const {SHOW_ALL} = VisibilityFilters
 
 function visibilityFilter(state = SHOW_ALL, action) {
@@ -17,7 +24,8 @@ function todos(state = [], action) {
       return [
         ...state, {
           text: action.text,
-          completed: false
+          completed: false,
+          Id: state.reduce((maxId, todo) => Math.max(todo.Id, maxId), -1) + 1
         }
       ]
     case COMPLETED_ADD_TODO:
@@ -35,6 +43,10 @@ function todos(state = [], action) {
           })
         }
         return todo
+      })
+    case DELETE_TODO:
+      return state.filter(todo => {
+        todo.Id !== action.Id
       })
     default:
       return state

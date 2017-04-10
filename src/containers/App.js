@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {activeaddTodo,completedaddTodo, completeTodo, setVisibilityFilter, VisibilityFilters,getCnodeApi} from '../action'
+import {activeaddTodo,completedaddTodo, completeTodo, setVisibilityFilter, VisibilityFilters,getCnodeApi,deleteTodo} from '../action'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Footer from '../components/Footer'
@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 class App extends Component {
 
     render() {      
-        const {dispatch, visibleTodos, visibilityFilter} = this.props      
+        const {dispatch, visibleTodos, visibilityFilter,Id} = this.props     
         return (
             <div>
                 <AddTodo
@@ -18,7 +18,7 @@ class App extends Component {
                     />
                 <TodoList
                     todos={visibleTodos}
-                    onTodoClick={index => dispatch(completeTodo(index))}/>
+                    delete={() => dispatch(deleteTodo(Id))}/>
                 <Footer
                     filter={visibilityFilter}
                     onFilterChange={nextFilter => dispatch(setVisibilityFilter(nextFilter))}/>
